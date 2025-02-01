@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useEdgeStore } from "@/lib/edgestore";
 import Link from "next/link";
 import { SingleImageDropzone } from "./image-drop";
@@ -24,12 +24,13 @@ export default function ChooseFile() {
             />
 
             <div className="h-[6px] w-44 border rounded overflow-hidden">
-                <div className="h-full bg-black transition-all duration-150" style={{width: `${progress}%`}}/>
+                <div className="h-full bg-black transition-all duration-150" style={{ width: `${progress}%` }} />
             </div>
 
             <button className="flex-col bg-black text-white" onClick={async () => {
-                if(file) {
+                if (file) {
                     const res = await edgestore.myPublicImages.upload({ file, options: { temporary: true }, onProgressChange: (progress) => { setProgress(progress); } });
+
                     setUrl({
                         url: res.url,
                         thumbnailUrl: res.thumbnailUrl
@@ -38,6 +39,7 @@ export default function ChooseFile() {
             }}>
                 Upload
             </button>
+
             {url?.url && <Link href={url.url} target="_blank">URL</Link>}
             {url?.thumbnailUrl && <Link href={url.thumbnailUrl} target="_blank">THUMBNAIL</Link>}
         </div>
