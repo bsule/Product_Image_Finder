@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useEdgeStore } from "@/lib/edgestore";
 import Link from "next/link";
 import { SingleImageDropzone } from "./image-drop";
@@ -37,7 +37,7 @@ export default function ChooseFile() {
                     });
                 }
             }}>
-                Upload
+                Upload and Find Stores
             </button>
 
             {url?.url && <Link href={url.url} target="_blank">URL</Link>}
