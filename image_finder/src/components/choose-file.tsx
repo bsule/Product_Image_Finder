@@ -40,8 +40,8 @@ export default function ChooseFile() {
                 Upload and Find Stores
             </button>
 
-            {url?.url && <Link href={url.url} target="_blank">URL</Link>}
-            {url?.thumbnailUrl && <Link href={url.thumbnailUrl} target="_blank">THUMBNAIL</Link>}
+            {/* {url?.url && <Link href={url.url} target="_blank">URL</Link>}
+            {url?.thumbnailUrl && <Link href={url.thumbnailUrl} target="_blank">THUMBNAIL</Link>} */}
         </div>
     );
 }
