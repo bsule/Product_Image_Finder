@@ -38,6 +38,7 @@ const { chromium } = require('playwright');
         return [...new Set(
             anchors
                 .map(a => a.href)
+                .filter((href, index, self) => self.indexOf(href) === index)
                 .filter(href => href.includes('/p/') && !href.includes('review'))
         )];
     });
@@ -50,10 +51,19 @@ const { chromium } = require('playwright');
         )];
     });
 
-    const pairedLinks = productLinks.slice(2, 8).map((link, index) => [
-        link,
-        picLinks[index + 2] || "No image"
-    ]);
+    const productPrices = await page.$$eval('[data-test="current-price"] span', (prices) => {
+        return prices.map(span => span.textContent.trim());
+    });
+
+    const pairedLinks = [];
+
+    for(let i = 2; i < 8; i++){
+        pairedLinks.push([
+            productLinks[i],
+            picLinks[i] || "No image",
+            productPrices[i] || "No price found"
+        ]);
+    };
     
     console.log("Paired Product and Image Links:", pairedLinks);
 
